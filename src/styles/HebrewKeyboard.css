@@ -1,0 +1,136 @@
+/* src/styles/HebrewKeyboard.css */
+
+/* --- Contenedor Principal (Cristal Oscuro) --- */
+.keyboard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+  gap: 18px;
+  padding: 35px;
+  
+  /* Fondo de cristal muy sutil para dejar ver el fondo de estrellas */
+  background: rgba(10, 10, 20, 0.4); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  
+  /* Sombra profunda para que flote en el vacío */
+  box-shadow: 
+    0 30px 70px rgba(0, 0, 0, 0.8),
+    inset 0 0 30px rgba(0,0,0,0.5);
+    
+  width: 100%;
+  max-width: 950px;
+}
+
+/* --- LA TECLA (El contenedor de la materia) --- */
+.keyboard-key {
+  position: relative;
+  height: 90px;
+  /* Importante: overflow hidden recorta el remolino que gira dentro */
+  overflow: hidden; 
+  border: none;
+  border-radius: 20px; /* Forma de cápsula/gota */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* Fondo base oscuro para que resalte el neón */
+  background: rgba(0, 0, 0, 0.6);
+  
+  /* Sombra interna estática para dar volumen 3D sobre la animación */
+  box-shadow: 
+    inset 0 5px 10px rgba(255,255,255,0.1), /* Brillo superior */
+    inset 0 -5px 10px rgba(0,0,0,0.8); /* Sombra inferior */
+    
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- EL MOTOR DE PLASMA (La animación) --- */
+/* Usamos el pseudo-elemento ::before para crear el efecto de movimiento */
+.keyboard-key::before {
+  content: '';
+  position: absolute;
+  /* Hacemos que sea mucho más grande que la tecla para que al girar no se vean bordes */
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0; /* Se queda al fondo */
+  
+  /* EL SECRETO: Un gradiente cónico que mezcla:
+     1. El color base de la escuela (var(--key-base))
+     2. Transparencia (para oscuridad)
+     3. Un toque de blanco (para brillo eléctrico)
+  */
+  background: conic-gradient(
+    from 0deg, 
+    transparent 0%, 
+    var(--key-base) 30%, 
+    rgba(255,255,255,0.8) 50%, 
+    var(--key-base) 70%, 
+    transparent 100%
+  );
+  
+  /* Animación de rotación infinita y lenta */
+  animation: rotateNeon 6s linear infinite;
+  /* Un poco de blur para que parezca gas o líquido, no líneas duras */
+  filter: blur(10px);
+  opacity: 0.6; /* Intensidad media en reposo */
+  transition: all 0.3s ease;
+}
+
+
+/* --- INTERACCIÓN (Hover) --- */
+.keyboard-key:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+/* Al pasar el mouse, aceleramos y abrillentamos el plasma */
+.keyboard-key:hover::before {
+  opacity: 1; /* Máxima intensidad */
+  filter: blur(5px) brightness(1.5); /* Más nítido y brillante */
+  animation-duration: 2s; /* Gira mucho más rápido */
+}
+
+
+/* --- TEXTOS (Deben estar por encima de la animación) --- */
+.key-char {
+  position: relative;
+  z-index: 2; /* Capa superior */
+  font-size: 2.2rem;
+  font-weight: 700;
+  font-family: 'Times New Roman', serif;
+  
+  /* Color blanco puro con sombra negra para máximo contraste */
+  color: #ffffff; 
+  text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+  margin-bottom: 4px;
+}
+
+.key-val {
+  position: relative;
+  z-index: 2;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0,0,0,0.5);
+  padding: 3px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+/* Definición de la animación de rotación */
+@keyframes rotateNeon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

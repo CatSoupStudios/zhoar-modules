@@ -1,0 +1,51 @@
+/* src/styles/Home.css */
+
+.home-page {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh; /* Ocupa toda la pantalla */
+  margin: 0 auto;
+  padding: 20px;
+  
+  /* Centrado perfecto Flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado Vertical */
+  align-items: center;     /* Centrado Horizontal */
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeIn 1s ease-in;
+}
+
+.home-title {
+  font-size: 3rem;
+  font-weight: 200; /* Letra fina elegante */
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+.home-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  .home-title { font-size: 2rem; }
+  .home-page { justify-content: flex-start; padding-top: 40px; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

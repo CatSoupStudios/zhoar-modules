@@ -1,0 +1,20 @@
+/* src/App.css */
+:root {
+  --bg-void: #050508; /* Casi negro, un azul muy profundo */
+  --glass-panel: rgba(255, 255, 255, 0.03);
+  --border-neon: rgba(255, 255, 255, 0.1);
+  --text-main: #e0e0e0;
+  --text-muted: #8888aa;
+  --glow-accent: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: var(--bg-void);
+  background-image: 
+    radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 70%); /* Luz cenital tenue */
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
